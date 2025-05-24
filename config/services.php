@@ -34,5 +34,18 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'openai' => [
+        'api_key' => env('OPENAI_API_KEY'),
+    ],
 
+    'gemini' => [
+        'api_key' => env('GEMINI_API_KEY'),
+    ],
+
+    'ai' => [
+        'default_provider' => env('AI_DEFAULT_PROVIDER', 'openai'),
+    ],
+    'claude' => [
+        'api_key' => env('CLAUDE_API_KEY'),
+    ],
 ];
