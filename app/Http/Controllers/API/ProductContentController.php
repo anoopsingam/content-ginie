@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 
 use App\Jobs\GenerateProductContentJob;
 use App\Models\ProductContentGeneration;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class ProductContentController extends Controller
 {
-    public function generateContent(Request $request)
+    public function generateContent(Request $request): JsonResponse
     {
         $validated = $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240', // 10MB max
@@ -72,7 +73,7 @@ class ProductContentController extends Controller
         }
     }
 
-    public function getStatus($requestId)
+    public function getStatus($requestId): JsonResponse
     {
         $generation = ProductContentGeneration::where('request_id', $requestId)->first();
 
@@ -103,7 +104,7 @@ class ProductContentController extends Controller
         return response()->json($response);
     }
 
-    public function getContent($requestId)
+    public function getContent($requestId): JsonResponse
     {
         $generation = ProductContentGeneration::where('request_id', $requestId)
             ->where('status', 'completed')
